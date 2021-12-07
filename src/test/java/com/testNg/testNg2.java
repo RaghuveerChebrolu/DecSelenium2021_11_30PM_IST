@@ -1,39 +1,39 @@
 package com.testNg;
 
 import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
-public class testNgAnnotations {
-	@Test(priority=16)
-	public void testcase1() {
-		System.out.println("inside testcase1");
-	}
-
-	@Test(priority=12)
-	public void Testcase2() {
-		System.out.println("inside testcase2");
-	}
-
-	@Test(priority=12)
-	public void Testcase3() {
-		System.out.println("inside testcase3");
-	}
-
-	@Test
-	public void testcase3() {
-		System.out.println("inside testcase4");
-	}
+public class testNg2 {
+	
 
 	@Test(priority=0)
-	public void testcase5() {
+	public void launchChromeBroswer() {
 		System.out.println("inside testcase5");
+		WebDriver driver;
+		//WebDriverManager.chromedriver().setup();
+		//driver=new ChromeDriver();
+		WebDriverManager.edgedriver().setup();
+		driver=new EdgeDriver();
+		driver.get("http://demo.borland.com/gmopost/");
+		driver.manage().window().maximize();
+		String actual = driver.getTitle();
+		System.out.println(actual);
+		Assert.assertEquals(actual, "Welcome to Green Mountain Outpos");
+		
 	}
 
 	@BeforeMethod
