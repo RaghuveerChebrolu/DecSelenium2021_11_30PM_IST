@@ -26,12 +26,12 @@ public class testNgAnnotations {
 		System.out.println("inside testcase3");
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void testcase3() {
 		System.out.println("inside testcase4");
 	}
 
-	@Test(priority=0)
+	@Test(priority=0,enabled=false)
 	public void testcase5() {
 		System.out.println("inside testcase5");
 	}
