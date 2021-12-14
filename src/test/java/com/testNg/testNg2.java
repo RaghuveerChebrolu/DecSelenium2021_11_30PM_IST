@@ -40,6 +40,30 @@ public class testNg2 {
 		String text = driver.findElement(By.xpath("//h1[contains(text(),'OnLine Catalog')]")).getText();
 		Assert.assertEquals(text, "OnLine Catalog");
 	}
+	
+	@Test(priority=2,dependsOnMethods={"EnterGMOnline"})
+	public void OrderQtyHikingBoots(){
+		System.out.println("inside OrderQtyHikingBoots");
+		driver.findElement(By.xpath("//input[@name='QTY_BOOTS']")).sendKeys("5");
+		driver.findElement(By.name("bSubmit")).click();
+		String PlaceOrder = driver.getTitle();
+		System.out.println(PlaceOrder);
+		Assert.assertEquals(PlaceOrder, "Place Order");
+		String UnitPrice = driver.findElement(By.xpath("//table[@cellpadding='4' and @cellspacing='1']/tbody/tr[2]/td[4]")).getText();
+		System.out.println("UnitPrice_HikingBoots: "+UnitPrice);
+		System.out.println(UnitPrice.length());
+		String Unit_Price = UnitPrice.substring(2).trim();
+		float Unit_Price_float = Float.parseFloat(Unit_Price);
+		System.out.println("Unit_Price_float:"+Unit_Price_float);
+		float TotalCalculatedFloatPrice = Unit_Price_float *5 ;
+		System.out.println("TotalCalculatedFloatPrice: "+TotalCalculatedFloatPrice);
+		String TotalPrice = driver.findElement(By.xpath("//table[@cellpadding='4' and @cellspacing='1']/tbody/tr[2]/td[5]")).getText();
+		float TotalPrice_floatFromWebTable =  Float.parseFloat(TotalPrice.substring(2).trim());
+		System.out.println("TotalPrice_floatFromWebTable: "+TotalPrice_floatFromWebTable);
+		Assert.assertEquals(TotalCalculatedFloatPrice, TotalPrice_floatFromWebTable);
+		
+		
+	}
 
 	@BeforeMethod
 	public void beforeMethod() {
