@@ -14,6 +14,14 @@ public class stringsBasics {
 		// Returns the character at ith index.
 		System.out.println("Character at 3rd position = " + s.charAt(3));
 
+		String str = "5467.84";
+		
+		String[] arr=str.split(".", 0); 
+		for (String w : arr) {  
+            System.out.println(w);  
+        }  
+		
+		
 		// Return the substring from the ith index character
 		// to end of string
 		System.out.println("Substring " + s.substring(3));
