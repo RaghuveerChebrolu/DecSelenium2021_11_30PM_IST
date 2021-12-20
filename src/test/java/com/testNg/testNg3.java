@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -110,6 +111,31 @@ public class testNg3 {
 		String promptResult = driver.findElement(By.id("promptResult")).getText();
 		Assert.assertEquals(promptResult, ObjProperties.getProperty("Alert4Result"));
 		SoftAssertion.assertAll();
+		
+	}
+	
+	@Test(priority=4)
+	public void HandlingFrames() throws InterruptedException{
+		System.out.println("inside HandlingFrames");
+		driver.navigate().to(ObjProperties.getProperty("FramesURL"));
+		//WebElement singleFrame = driver.findElement(By.xpath("//iframe[@id='singleframe']"));
+		driver.switchTo().frame("singleframe");
+		driver.findElement(By.xpath("//input[@type='text']")).sendKeys("Hi How are you");
+		driver.switchTo().defaultContent();/////VVI : 
+		
+		driver.findElement(By.xpath("//a[@href='#Multiple']")).click();
+		
+		WebElement Multipleframe = driver.findElement(By.xpath("//iframe[@src='MultipleFrames.html']"));
+		driver.switchTo().frame(Multipleframe);
+		
+		WebElement Singleframe = driver.findElement(By.xpath("//iframe[@src='SingleFrame.html']"));
+		driver.switchTo().frame(Singleframe);
+		driver.findElement(By.xpath("//input[@type='text']")).sendKeys("single frame with in multiple frame");
+		driver.switchTo().defaultContent();
+		
+		driver.navigate().back();
+		Thread.sleep(2000);
+		driver.navigate().forward();
 	}
 	
 	
