@@ -17,8 +17,8 @@ public class reverseEachWordInStringwithoutReverseMethod {
 		int count =words.length;
 		System.out.println(count);
 		
-		for (int i=count-1 ; i>=0;i--){
-		//for (int i=0 ; i<count;i++){
+		//for (int i=count-1 ; i>=0;i--){
+		for (int i=0 ; i<count;i++){
 			String word =words[i];
 			String RevWord="";
 			for (int j= word.length()-1; j>=0;j--){

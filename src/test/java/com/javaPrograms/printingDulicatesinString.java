@@ -7,13 +7,15 @@ import java.util.Set;
 public class printingDulicatesinString {
 
 	public static void main(String[] args) {
-		printDuplicateCharacters("Hi How are you doing");
+		printingDulicatesinString obj = new printingDulicatesinString();
+		obj.printDuplicateCharacters("Hi How are you doing");
+		String s = new String("Hi How are you doing");
 	}
 
 	String str = "";
 
-	public static void printDuplicateCharacters(String word) {
-		char[] characters = word.toCharArray();
+	public  void printDuplicateCharacters(String str) {
+		char[] characters = str.toCharArray();
 		// build HashMap with character and number of times they appear in
 		// String
 		HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
@@ -26,7 +28,7 @@ public class printingDulicatesinString {
 		}
 		// Iterate through HashMap to print all duplicate characters of String
 		Set<Map.Entry<Character, Integer>> entrySet = charMap.entrySet();
-		System.out.printf("List of duplicate characters in String '%s' %n", word);
+		System.out.printf("List of duplicate characters in String '%s' %n", str);
 		for (Map.Entry<Character, Integer> entry : entrySet) {
 			if (entry.getValue() >=1) {
 				System.out.printf("%s : %d %n", entry.getKey(), entry.getValue());
