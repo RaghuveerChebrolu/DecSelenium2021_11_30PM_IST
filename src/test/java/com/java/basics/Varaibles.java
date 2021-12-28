@@ -2,8 +2,11 @@ package com.java.basics;
 
 public class Varaibles {
 	static int m = 100;// static variable
-	int data = 50;// instance variable
+	int data;// instance variable
 
+	Varaibles(){
+		data=16;
+	}
 	 void method() {
 		int n = 90;// local variable
 		System.out.println(n);
