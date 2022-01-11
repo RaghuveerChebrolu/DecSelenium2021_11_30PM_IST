@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -50,8 +51,9 @@ public class testNg4 extends library_BusinessFunctions{
 	@Test(priority=1,dependsOnMethods={"launchGmoOnlineApplication"})
 	public void EnterGMOnline(){
 		System.out.println("inside EnterGMOnline");
-		driver.findElement(By.name(Orep.submitbuttonGmoOnline)).click();
-		String text = driver.findElement(By.xpath(Orep.TextGmoOnline)).getText();
+//		driver.findElement(By.name(Orep.submitbuttonGmoOnline)).click();
+		library_BusinessFunctions.FindElement(Orep.submitbuttonGmoOnline).click();
+		String text = library_BusinessFunctions.FindElement(Orep.TextGmoOnline).getText();
 		Assert.assertEquals(text, "OnLine Catalog");
 	}
 	
@@ -60,6 +62,7 @@ public class testNg4 extends library_BusinessFunctions{
 		System.out.println("inside OrderQtyHikingBoots");
 		driver.findElement(By.xpath("//input[@name='QTY_BOOTS']")).sendKeys(constants.QTY_BOOTS);
 		driver.findElement(By.name("bSubmit")).click();
+		waitForPageToLoad();
 		String PlaceOrder = driver.getTitle();
 		System.out.println(PlaceOrder);
 		Assert.assertEquals(PlaceOrder, ObjProperties.getProperty("PlaceOrderTitle"));
@@ -82,6 +85,7 @@ public class testNg4 extends library_BusinessFunctions{
 	public void ValidatingAlerts() throws InterruptedException{
 		System.out.println("ValidatingAlerts");
 		driver.navigate().to(ObjProperties.getProperty("AlertURL"));
+		waitForPageToLoad();
 		driver.findElement(By.id("alertButton")).click();
 		Alert ObjAlert1 = driver.switchTo().alert();
 		String Alert1 = ObjAlert1.getText();
@@ -120,6 +124,7 @@ public class testNg4 extends library_BusinessFunctions{
 	public void HandlingFrames() throws InterruptedException{
 		System.out.println("inside HandlingFrames");
 		driver.navigate().to(ObjProperties.getProperty("FramesURL"));
+		waitForPageToLoad();
 		//WebElement singleFrame = driver.findElement(By.xpath("//iframe[@id='singleframe']"));
 		driver.switchTo().frame("singleframe");
 		driver.findElement(By.xpath("//input[@type='text']")).sendKeys("Hi How are you");
@@ -138,6 +143,16 @@ public class testNg4 extends library_BusinessFunctions{
 		driver.navigate().back();
 		Thread.sleep(2000);
 		driver.navigate().forward();
+	}
+	
+	@Test(priority=5)
+	public void ValidateHandlingWindows(){
+		System.out.println("inside ValidateHandlingWindows");
+		driver.navigate().to(ObjProperties.getProperty("nxtgenaiacademyURL"));
+		waitForPageToLoad();
+		library_BusinessFunctions.FindElement(Orep.NxtGenNewBriwserWindow).click();
+		Set<String> AllWindows=driver.getWindowHandles();
+		
 	}
 	
 	

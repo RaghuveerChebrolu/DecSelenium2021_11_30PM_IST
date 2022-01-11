@@ -4,19 +4,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class library_BusinessFunctions {
-	public WebDriver driver;
+	public static WebDriver driver;
 	public static Properties ObjProperties = new Properties();
 
 	public static void ReadingPropertyFile() throws IOException {
@@ -34,7 +40,7 @@ public class library_BusinessFunctions {
 		}
 	}
 	
-	public void LaunchBrower() {
+	public static void LaunchBrower() {
 		String Browser = ObjProperties.getProperty("browser");
 		switch(Browser){
 		case "chrome":
@@ -60,6 +66,70 @@ public class library_BusinessFunctions {
 		driver.manage().window().maximize();
 		//implicit wait : global waiting mechanism which is applicable for all webElements
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+	}
+	
+	public static WebElement FindElement(String OrepLocator){
+		By search=null;
+		System.out.println(OrepLocator); 
+		String locator = OrepLocator.split("&")[0];
+		String value = OrepLocator.split("&")[1];
+		System.out.println(locator);
+		System.out.println(value);
+		if(locator.equals("name")){
+			search=By.name(value);
+		}else if (locator.equals("id")){
+			search=By.id(value);
+		}else if (locator.equals("xpath")){
+			search=By.xpath(value);
+		}else if (locator.equals("tagName")){
+			search=By.tagName(value);
+		}else if (locator.equals("className")){
+			search=By.className(value);
+		}else if (locator.equals("partialLinkText")){
+			search=By.partialLinkText(value);
+		}else if (locator.equals("cssSelector")){
+			search=By.cssSelector(value);
+		}else if (locator.equals("linkText")){
+			search=By.linkText(value);
+		}
+		return driver.findElement(search);
+	}
+	
+	public static List<WebElement> FindElements(String OrepLocator){
+		By search=null;
+		System.out.println(OrepLocator); 
+		String locator = OrepLocator.split("&")[0];
+		String value = OrepLocator.split("&")[1];
+		System.out.println(locator);
+		System.out.println(value);
+		if(locator.equals("name")){
+			search=By.name(value);
+		}else if (locator.equals("id")){
+			search=By.id(value);
+		}else if (locator.equals("xpath")){
+			search=By.xpath(value);
+		}else if (locator.equals("tagName")){
+			search=By.tagName(value);
+		}else if (locator.equals("className")){
+			search=By.className(value);
+		}else if (locator.equals("partialLinkText")){
+			search=By.partialLinkText(value);
+		}else if (locator.equals("cssSelector")){
+			search=By.cssSelector(value);
+		}else if (locator.equals("linkText")){
+			search=By.linkText(value);
+		}
+		return driver.findElements(search);
+	}
+	
+	public static void waitForPageToLoad() {
+		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+			}
+		};
+		// explicit wait -> Applicable for one webEllement
+		WebDriverWait wait = new WebDriverWait(driver, 60);//60 seconds 
+		wait.until(pageLoadCondition);
 	}
 }
