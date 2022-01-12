@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -150,8 +151,42 @@ public class testNg4 extends library_BusinessFunctions{
 		System.out.println("inside ValidateHandlingWindows");
 		driver.navigate().to(ObjProperties.getProperty("nxtgenaiacademyURL"));
 		waitForPageToLoad();
+		String ParentWindowHandle = driver.getWindowHandle();
 		library_BusinessFunctions.FindElement(Orep.NxtGenNewBriwserWindow).click();
 		Set<String> AllWindows=driver.getWindowHandles();
+		System.out.println("windows count : "+AllWindows.size());
+		for(String IndividulaWindow :AllWindows ){
+			driver.switchTo().window(IndividulaWindow);
+			String title = driver.getTitle();
+			System.out.println("title:"+title);
+			if(title.equals(ObjProperties.getProperty("newBrowserWindowTitle"))){
+				//driver.manage().window().maximize();
+				library_BusinessFunctions.FindElement(Orep.newBrowserWindowMenu).click();
+				JavascriptExecutor js = (JavascriptExecutor)driver;//downcasting
+				js.executeScript("window.scrollBy(0, 1000)");
+				Boolean flag = library_BusinessFunctions.FindElement(Orep.newBrowserWindowSeleniumWebdriver).isEnabled();
+				System.out.println("flag:"+flag);
+				// js.executeScript("window.scrollBy(0,1000)");//To scroll vertically
+				// Down by 1000 pixels
+				// js.executeScript("window.scrollBy(0,-500)");//To scroll vertically Up
+				// by 500 pixels
+				// js.executeScript("window.scrollBy(500,0)");//To scroll horizontally
+				// right by 500 pixels
+				// js.executeScript("window.scrollBy(-500,0)");//To scroll horizontally
+				// left by 500 pixels
+
+				/*WebElement element = library.FindElement(ObjRepository.DoubleCickFrame);
+				js.executeScript("arguments[0].scrollIntoView();", element);*/
+			}else if(title.equals("Demo Site – Multiple Windows – NxtGen A.I Academy")){
+				String text_numberOfivisits =library_BusinessFunctions.FindElement(Orep.newBrowserWindowCountOfVisits).getText();
+				System.out.println("text_numberOfivisits:"+text_numberOfivisits);
+				String text_numberOfivisitsInnerHTML =library_BusinessFunctions.FindElement(Orep.newBrowserWindowCountOfVisits).getAttribute("innerHTML");
+				System.out.println("text_numberOfivisitsInnerHTML:"+text_numberOfivisitsInnerHTML);
+				String text_numberOfivisitsOuterHTML =library_BusinessFunctions.FindElement(Orep.newBrowserWindowCountOfVisits).getAttribute("outerHTML");
+				System.out.println("text_numberOfivisitsOuterHTML:"+text_numberOfivisitsOuterHTML);
+			}
+		}
+		driver.switchTo().window(ParentWindowHandle);
 		
 	}
 	
