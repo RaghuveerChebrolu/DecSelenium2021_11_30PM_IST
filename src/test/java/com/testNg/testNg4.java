@@ -30,6 +30,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
@@ -46,7 +48,6 @@ public class testNg4 extends library_BusinessFunctions{
 		String actual = driver.getTitle();
 		System.out.println(actual);
 		Assert.assertEquals(actual, "Welcome to Green Mountain Outpost");
-		
 	}
 	
 	@Test(priority=1,dependsOnMethods={"launchGmoOnlineApplication"})
@@ -187,6 +188,59 @@ public class testNg4 extends library_BusinessFunctions{
 			}
 		}
 		driver.switchTo().window(ParentWindowHandle);
+		
+	}
+	
+	@Test(priority=6)
+	public void ValidateMouseOperations() throws InterruptedException{
+		System.out.println("inside ValidateMouseOperations");
+		driver.navigate().to(ObjProperties.getProperty("mouseOpeartionRightClick"));
+		waitForPageToLoad();
+		Actions Obj = new Actions(driver);
+		//right click
+		WebElement Rightclick = library_BusinessFunctions.FindElement(Orep.MouseOperationRightClick);
+		Obj.contextClick(Rightclick).build().perform();
+		Thread.sleep(4000);
+		//library_BusinessFunctions.FindElement(Orep.MouseOperationRightclickCopyAction).click();
+		WebElement copyAction = library_BusinessFunctions.FindElement(Orep.MouseOperationRightclickCopyAction);
+		copyAction.click();
+		Thread.sleep(4000);
+		Alert objAlert = driver.switchTo().alert();
+		String TextPopUpAlert = objAlert.getText();
+		System.out.println("TextPopUpAlert:"+TextPopUpAlert);
+		Assert.assertEquals(TextPopUpAlert,ObjProperties.getProperty("mouseOpeartionRightclickCopyActionText") );
+		objAlert.accept();
+		
+		//double click
+		driver.navigate().to(ObjProperties.getProperty("mouseOpeartionDoubleClick"));
+		waitForPageToLoad();
+		WebElement frameElement = library_BusinessFunctions.FindElement(Orep.MouseOpeartionFrame);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView();", frameElement);
+		driver.switchTo().frame(frameElement);
+		WebElement doubleClickBox = library_BusinessFunctions.FindElement(Orep.MouseOpeartionDoubeClickBox);
+		Obj.doubleClick(doubleClickBox).build().perform();
+
+		Color BackGroundColor = Color
+				.fromString(library_BusinessFunctions.FindElement(Orep.MouseOpeartionDoubeClickBox).getCssValue("background-color"));
+		System.out.println("BackGroundColor:" + BackGroundColor);
+		String ActualBackGroundColor = BackGroundColor.asRgba();
+		System.out.println("ActualBackGroundColor:" + ActualBackGroundColor);
+		Assert.assertEquals(ActualBackGroundColor, "rgba(255, 255, 0, 1)");
+		driver.switchTo().defaultContent();
+		System.out.println("came out of frame of doube click");
+		
+		//Drag and drop
+		System.out.println("inside ValidateMouseOperations drag and drop");
+		driver.navigate().to(ObjProperties.getProperty("mouseOperationDragAndDrop"));
+		waitForPageToLoad();
+		WebElement frameElement2 = library_BusinessFunctions.FindElement(Orep.MouseOpeartionFrame);
+		driver.switchTo().frame(frameElement2);
+		WebElement drag = library_BusinessFunctions.FindElement(Orep.MouseOpeartionDrag);
+		WebElement drop = library_BusinessFunctions.FindElement(Orep.MouseOpeartionDrop);
+		//Obj.dragAndDrop(drag, drop).build().perform();
+		Obj.clickAndHold(drag);
+		Obj.moveToElement(drop).build().perform();
 		
 	}
 	
