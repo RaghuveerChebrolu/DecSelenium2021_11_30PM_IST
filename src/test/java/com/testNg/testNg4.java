@@ -163,8 +163,9 @@ public class testNg4 extends library_BusinessFunctions{
 			if(title.equals(ObjProperties.getProperty("newBrowserWindowTitle"))){
 				//driver.manage().window().maximize();
 				library_BusinessFunctions.FindElement(Orep.newBrowserWindowMenu).click();
-				JavascriptExecutor js = (JavascriptExecutor)driver;//downcasting
-				js.executeScript("window.scrollBy(0, 1000)");
+				//JavascriptExecutor js = (JavascriptExecutor)driver;//downcasting
+				//js.executeScript("window.scrollBy(0, 1000)");
+				scrollDown(1000);
 				Boolean flag = library_BusinessFunctions.FindElement(Orep.newBrowserWindowSeleniumWebdriver).isEnabled();
 				System.out.println("flag:"+flag);
 				// js.executeScript("window.scrollBy(0,1000)");//To scroll vertically
@@ -210,6 +211,7 @@ public class testNg4 extends library_BusinessFunctions{
 		System.out.println("TextPopUpAlert:"+TextPopUpAlert);
 		Assert.assertEquals(TextPopUpAlert,ObjProperties.getProperty("mouseOpeartionRightclickCopyActionText") );
 		objAlert.accept();
+		Screenshot(driver);
 		
 		//double click
 		driver.navigate().to(ObjProperties.getProperty("mouseOpeartionDoubleClick"));
@@ -229,6 +231,7 @@ public class testNg4 extends library_BusinessFunctions{
 		Assert.assertEquals(ActualBackGroundColor, "rgba(255, 255, 0, 1)");
 		driver.switchTo().defaultContent();
 		System.out.println("came out of frame of doube click");
+		Screenshot(driver);
 		
 		//Drag and drop
 		System.out.println("inside ValidateMouseOperations drag and drop");
@@ -241,9 +244,17 @@ public class testNg4 extends library_BusinessFunctions{
 		//Obj.dragAndDrop(drag, drop).build().perform();
 		Obj.clickAndHold(drag);
 		Obj.moveToElement(drop).build().perform();
-		
+		library_BusinessFunctions.Screenshot(driver);
 	}
 	
+	@Test(priority=7)
+	public void HandlingWebTable(){
+		System.out.println("inside HandlingWebTable");
+		driver.navigate().to(ObjProperties.getProperty("WebTableURL"));
+		waitForPageToLoad();
+		scrollDown(500);
+		
+	}
 	
 	@BeforeMethod
 	public void beforeMethod() {

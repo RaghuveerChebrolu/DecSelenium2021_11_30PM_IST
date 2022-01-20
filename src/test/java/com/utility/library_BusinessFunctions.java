@@ -4,12 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -131,5 +136,33 @@ public class library_BusinessFunctions {
 		// explicit wait -> Applicable for one webEllement
 		WebDriverWait wait = new WebDriverWait(driver, 60);//60 seconds 
 		wait.until(pageLoadCondition);
+	}
+	
+	public static void Screenshot(WebDriver driver){
+		File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		String dateName = new SimpleDateFormat("yyyyMMDDhhmmss").format(new Date());
+		File destFile = new File(System.getProperty("user.dir")+"//ScreenShots//"+dateName+ "captured.png");
+		try {
+			FileUtils.copyFile(srcFile, destFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static String takescreeshot(WebDriver driver) throws Exception {
+		File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		//String dateName = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+		String dateName = new SimpleDateFormat("yyyyMMDDhhmmss").format(new Date());
+		System.out.println(dateName);
+		String destination = System.getProperty("user.dir") + "//screenshots//" + dateName
+				+ "captured.png";
+		FileUtils.copyFile(source, new File(destination));
+		return destination;
+	}
+	
+	public static void scrollDown(int Y){
+		JavascriptExecutor js = (JavascriptExecutor)driver;//downcasting
+		js.executeScript("window.scrollBy(0,"+Y+")");
 	}
 }
