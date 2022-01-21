@@ -15,6 +15,7 @@ public class Orep {
 	public static final String MouseOpeartionDoubeClickBox = constants.xpath+"&"+"//span[contains(text(),'Double click the block')]/preceding-sibling::div";
 	public static final String MouseOpeartionDrag = constants.xpath+"&"+"//p[contains(text(),'Drag me to my target')]";
 	public static final String MouseOpeartionDrop = constants.ID+"&"+"droppable";
+	public static final String WebTableLastNames = constants.xpath+"&"+"//table[@id='example']/tbody/tr/td[3]";
 	
 	
 	

@@ -2,6 +2,8 @@ package com.utility;
 
 public class constants {
 	public static final String QTY_BOOTS="4";
+	public static final String WebtableInputLastName="Decker";
+	public static final int WebtableScrllDown=500;
 	public static final String ID="id";
 	public static final String Name="name";
 	public static final String className="className";
