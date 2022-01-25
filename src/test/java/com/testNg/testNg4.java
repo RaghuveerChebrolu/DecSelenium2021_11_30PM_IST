@@ -15,6 +15,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -315,6 +323,47 @@ public class testNg4 extends library_BusinessFunctions {
 		}
 	}
 
+	@Test(priority=8)
+	public void FileUpload() throws AWTException, InterruptedException {
+		System.out.println("inside FileUpload");
+		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		driver.navigate().to(ObjProperties.getProperty("FileUpload"));
+		waitForPageToLoad();
+		Thread.sleep(8000);
+		Actions obj = new Actions(driver);
+		WebElement element = library_BusinessFunctions.FindElement(Orep.FileUploadBrowseButton);
+		obj.click(element).build().perform();
+		
+		StringSelection objStringSelection = new StringSelection(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\Sample.jpg");
+		Clipboard objClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		objClipboard.setContents(objStringSelection, null);
+		try {
+			Transferable objTransferable = objClipboard.getContents(null);
+			if (objTransferable.isDataFlavorSupported(DataFlavor.stringFlavor))
+				System.out.println(objTransferable.getTransferData(DataFlavor.stringFlavor));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Robot objRobot = new Robot();
+		objRobot.delay(250);
+		objRobot.keyPress(KeyEvent.VK_ENTER);
+		objRobot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		objRobot.keyPress(KeyEvent.VK_CONTROL);
+		objRobot.keyPress(KeyEvent.VK_V);
+		Thread.sleep(2000);
+		objRobot.keyRelease(KeyEvent.VK_V);
+		objRobot.keyRelease(KeyEvent.VK_CONTROL);
+		Thread.sleep(4000);
+		objRobot.keyPress(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		objRobot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		
+	}
+	
 	@BeforeMethod
 	public void beforeMethod() {
 		System.out.println("inside beforeMethod");
