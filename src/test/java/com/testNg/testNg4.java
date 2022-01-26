@@ -58,7 +58,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 0)
 	public void launchGmoOnlineApplication() {
 		System.out.println("inside launchGmoOnlineApplication");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		String actual = driver.getTitle();
 		System.out.println(actual);
 		Assert.assertEquals(actual, "Welcome to Green Mountain Outpost");
@@ -67,7 +68,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 1, dependsOnMethods = { "launchGmoOnlineApplication" })
 	public void EnterGMOnline() {
 		System.out.println("inside EnterGMOnline");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		// driver.findElement(By.name(Orep.submitbuttonGmoOnline)).click();
 		library_BusinessFunctions.FindElement(Orep.submitbuttonGmoOnline).click();
 		String text = library_BusinessFunctions.FindElement(Orep.TextGmoOnline).getText();
@@ -77,7 +79,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 2, dependsOnMethods = { "EnterGMOnline" })
 	public void OrderQtyHikingBoots() {
 		System.out.println("inside OrderQtyHikingBoots");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.findElement(By.xpath("//input[@name='QTY_BOOTS']")).sendKeys(constants.QTY_BOOTS);
 		driver.findElement(By.name("bSubmit")).click();
 		waitForPageToLoad();
@@ -104,7 +107,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 3)
 	public void ValidatingAlerts() throws InterruptedException {
 		System.out.println("ValidatingAlerts");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(ObjProperties.getProperty("AlertURL"));
 		waitForPageToLoad();
 		driver.findElement(By.id("alertButton")).click();
@@ -144,7 +148,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 4)
 	public void HandlingFrames() throws InterruptedException {
 		System.out.println("inside HandlingFrames");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(ObjProperties.getProperty("FramesURL"));
 		waitForPageToLoad();
 		// WebElement singleFrame =
@@ -171,7 +176,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 5)
 	public void ValidateHandlingWindows() {
 		System.out.println("inside ValidateHandlingWindows");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(ObjProperties.getProperty("nxtgenaiacademyURL"));
 		waitForPageToLoad();
 		String ParentWindowHandle = driver.getWindowHandle();
@@ -229,7 +235,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 6)
 	public void ValidateMouseOperations() throws InterruptedException {
 		System.out.println("inside ValidateMouseOperations");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(ObjProperties.getProperty("mouseOpeartionRightClick"));
 		waitForPageToLoad();
 		Actions Obj = new Actions(driver);
@@ -286,7 +293,8 @@ public class testNg4 extends library_BusinessFunctions {
 	@Test(priority = 7)
 	public void HandlingWebTable() {
 		System.out.println("inside HandlingMouseOpeartions");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(ObjProperties.getProperty("WebTableURL"));
 		waitForPageToLoad();
 		library_BusinessFunctions.scrollDown(constants.WebtableScrllDown);
@@ -323,17 +331,18 @@ public class testNg4 extends library_BusinessFunctions {
 		}
 	}
 
-	@Test(priority=8)
+	@Test(priority = 8)
 	public void FileUpload() throws AWTException, InterruptedException {
 		System.out.println("inside FileUpload");
-		extent_Test = extent_Reports.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(ObjProperties.getProperty("FileUpload"));
 		waitForPageToLoad();
 		Thread.sleep(8000);
 		Actions obj = new Actions(driver);
 		WebElement element = library_BusinessFunctions.FindElement(Orep.FileUploadBrowseButton);
 		obj.click(element).build().perform();
-		
+
 		StringSelection objStringSelection = new StringSelection(
 				System.getProperty("user.dir") + "\\src\\test\\resources\\Sample.jpg");
 		Clipboard objClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -361,9 +370,36 @@ public class testNg4 extends library_BusinessFunctions {
 		Thread.sleep(2000);
 		objRobot.keyRelease(KeyEvent.VK_ENTER);
 		Thread.sleep(2000);
-		
+
 	}
-	
+
+	@Test
+	public void FileDownload() throws InterruptedException {
+		System.out.println("inside FileDownload");
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
+		driver.navigate().to(ObjProperties.getProperty("FileDownload"));
+		waitForPageToLoad();
+		Actions obj = new Actions(driver);
+		WebElement Element = library_BusinessFunctions.FindElement(Orep.FileDownload100kb);
+		obj.click(Element).build().perform();
+		Thread.sleep(30000);
+		File objFile = new File(System.getProperty("user.dir"));
+		File[] AllListofFiles = objFile.listFiles();
+		boolean fileFound = false;
+		File Obj_File = null;
+		for (File individualFile : AllListofFiles) {
+			String FileName = individualFile.getName();
+			System.out.println("FileName:" + FileName);
+			if (FileName.contains("file-sample")) {
+				fileFound = true;
+				Obj_File = new File(FileName);
+			}
+		}
+		Assert.assertTrue(fileFound, "downloaded file is not found");
+		Obj_File.deleteOnExit();
+	}
+
 	@BeforeMethod
 	public void beforeMethod() {
 		System.out.println("inside beforeMethod");
@@ -371,20 +407,34 @@ public class testNg4 extends library_BusinessFunctions {
 
 	@AfterMethod
 	public void afterMethod(ITestResult result) throws Exception {
-		if(result.getStatus()==ITestResult.FAILURE){
-			extent_Test.log(Status.FAIL, "TEST CASE FAILED IS " + result.getName()); // to add name in extent report
-			extent_Test.log(Status.FAIL, "TEST CASE FAILED IS " + result.getThrowable()); // to add error/exception in extent report
+		if (result.getStatus() == ITestResult.FAILURE) {
+			extent_Test.log(Status.FAIL, "TEST CASE FAILED IS " + result.getName()); // to
+																						// add
+																						// name
+																						// in
+																						// extent
+																						// report
+			extent_Test.log(Status.FAIL, "TEST CASE FAILED IS " + result.getThrowable()); // to
+																							// add
+																							// error/exception
+																							// in
+																							// extent
+																							// report
 			String screenshotPath = library_BusinessFunctions.takescreeshot(driver, result.getName());
-			extent_Test.addScreenCaptureFromPath(screenshotPath);// adding screen shot to extent report
-		}else if(result.getStatus()==ITestResult.SUCCESS){
-			extent_Test.log(Status.PASS, "TEST CASE Passed IS " + result.getName()); 
+			extent_Test.addScreenCaptureFromPath(screenshotPath);// adding
+																	// screen
+																	// shot to
+																	// extent
+																	// report
+		} else if (result.getStatus() == ITestResult.SUCCESS) {
+			extent_Test.log(Status.PASS, "TEST CASE Passed IS " + result.getName());
 			String screenshotPath = library_BusinessFunctions.takescreeshot(driver, result.getName());
 			extent_Test.addScreenCaptureFromPath(screenshotPath);
-		}else if(result.getStatus()==ITestResult.SKIP){
+		} else if (result.getStatus() == ITestResult.SKIP) {
 			extent_Test.log(Status.SKIP, "Test Case SKIPPED IS " + result.getName());
 		}
 		System.out.println("inside afterMethod");
-		
+
 	}
 
 	@BeforeClass
