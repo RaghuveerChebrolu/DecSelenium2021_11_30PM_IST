@@ -23,6 +23,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,6 +37,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class library_BusinessFunctions {
 	public static WebDriver driver;
+	//public static HtmlUnitDriver unitDriver ;
 	public static Properties ObjProperties = new Properties();
 	
 	public static ExtentHtmlReporter extent_HtmlReporter;
@@ -117,6 +119,33 @@ public class library_BusinessFunctions {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	
+	public static WebElement FindElementUsingHeadLess(HtmlUnitDriver unitDriver,String OrepLocator){
+		By search=null;
+		System.out.println(OrepLocator); 
+		String locator = OrepLocator.split("&")[0];
+		String value = OrepLocator.split("&")[1];
+		System.out.println(locator);
+		System.out.println(value);
+		if(locator.equals("name")){
+			search=By.name(value);
+		}else if (locator.equals("id")){
+			search=By.id(value);
+		}else if (locator.equals("xpath")){
+			search=By.xpath(value);
+		}else if (locator.equals("tagName")){
+			search=By.tagName(value);
+		}else if (locator.equals("className")){
+			search=By.className(value);
+		}else if (locator.equals("partialLinkText")){
+			search=By.partialLinkText(value);
+		}else if (locator.equals("cssSelector")){
+			search=By.cssSelector(value);
+		}else if (locator.equals("linkText")){
+			search=By.linkText(value);
+		}
+		return unitDriver.findElement(search);
+	}
+	
 	public static WebElement FindElement(String OrepLocator){
 		By search=null;
 		System.out.println(OrepLocator); 
@@ -143,6 +172,7 @@ public class library_BusinessFunctions {
 		}
 		return driver.findElement(search);
 	}
+	
 	
 	public static List<WebElement> FindElements(String OrepLocator){
 		By search=null;
