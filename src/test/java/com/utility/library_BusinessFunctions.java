@@ -26,6 +26,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -119,7 +120,7 @@ public class library_BusinessFunctions {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	
-	public static WebElement FindElementUsingHeadLess(HtmlUnitDriver unitDriver,String OrepLocator){
+	public static WebElement FindElementUsingHeadLess(WebDriver unitDriver,String OrepLocator){
 		By search=null;
 		System.out.println(OrepLocator); 
 		String locator = OrepLocator.split("&")[0];
