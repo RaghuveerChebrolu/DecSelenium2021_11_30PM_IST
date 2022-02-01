@@ -34,6 +34,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
@@ -71,6 +72,7 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 			FileInputStream objFileInput = new FileInputStream(objFile);
 			XSSFWorkbook objXSSFWorkBook = new XSSFWorkbook(objFileInput);
 			XSSFSheet ObjXSSFSheet = objXSSFWorkBook.getSheet("TestData");
+			// HSSFWorkbook and HSSFSheet for .xls file format.
 			int Rows = ObjXSSFSheet.getLastRowNum();
 			System.out.println("Rows:" + Rows);
 			for (int RowNumber = 1; RowNumber <= Rows; RowNumber++) {
@@ -78,7 +80,7 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 				/*for (Map.Entry m : testDataMap.entrySet()) {
 					System.out.println(m.getKey() + " " + m.getValue());
 				}*/
-				System.out.println("---------------");
+				/*System.out.println("---------------");
 				System.out.println(testDataMap.get("RunMode"));
 				System.out.println(testDataMap.get("TestCaseName"));
 				System.out.println(testDataMap.get("FirstName"));
@@ -92,7 +94,31 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 				System.out.println(testDataMap.get("DOB_MM"));
 				System.out.println(testDataMap.get("Password"));
 				System.out.println(testDataMap.get("confirm Password"));
-				System.out.println("**************");
+				System.out.println("**************");*/
+				
+				if(testDataMap.get("RunMode").equalsIgnoreCase("yes")){
+					library_BusinessFunctions.FindElement(Orep.DataDrivenFirstName).clear();
+					library_BusinessFunctions.FindElement(Orep.DataDrivenFirstName).sendKeys(testDataMap.get("FirstName"));
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenLastName).clear();
+					library_BusinessFunctions.FindElement(Orep.DataDrivenLastName).sendKeys(testDataMap.get("LastName"));
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenAddress).sendKeys(testDataMap.get("Address"));
+
+					library_BusinessFunctions.FindElement(Orep.DataDrivenEmail).sendKeys(testDataMap.get("Email Address"));
+					//library_BusinessFunctions.FindElement(Orep.DataDrivenPhone).sendKeys(testDataMap.get("PhoneNumber"));
+					
+					if(testDataMap.get("Gender").equals("Male")){
+						library_BusinessFunctions.FindElement(Orep.DataDrivenGenderMale).click();
+					}else {
+						library_BusinessFunctions.FindElement(Orep.DataDrivenGenderFeMale).click();
+					}
+					
+				}else{
+					System.out.println("Run Mode is not marked as yes for Row number: "+RowNumber);
+				}
+				
+				
 			}
 
 		} catch (FileNotFoundException e) {
@@ -104,7 +130,7 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 
 	public HashMap<String, String> ReadExcelFile(XSSFSheet objXSSFSheet, int rowNumber) {
 		// TODO Auto-generated method stub
-
+		DataFormatter obj = new DataFormatter();
 		testDataMap.put("RunMode", objXSSFSheet.getRow(rowNumber).getCell(0).getStringCellValue());
 		testDataMap.put("TestCaseName", objXSSFSheet.getRow(rowNumber).getCell(1).getStringCellValue());
 		testDataMap.put("FirstName", objXSSFSheet.getRow(rowNumber).getCell(2).getStringCellValue());
@@ -113,7 +139,8 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 		testDataMap.put("Email Address", objXSSFSheet.getRow(rowNumber).getCell(5).getStringCellValue());
 
 		//testDataMap.put("PhoneNumber", objXSSFSheet.getRow(rowNumber).getCell(6).getStringCellValue());
-
+		//obj.formatCellValue(cell)
+		
 		testDataMap.put("Gender", objXSSFSheet.getRow(rowNumber).getCell(7).getStringCellValue());
 		testDataMap.put("Hobbies", objXSSFSheet.getRow(rowNumber).getCell(8).getStringCellValue());
 		testDataMap.put("Languages", objXSSFSheet.getRow(rowNumber).getCell(9).getStringCellValue());
