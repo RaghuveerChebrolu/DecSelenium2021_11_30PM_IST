@@ -251,4 +251,17 @@ public class library_BusinessFunctions {
 		JavascriptExecutor js = (JavascriptExecutor)driver;//downcasting
 		js.executeScript("window.scrollBy(0,"+Y+")");
 	}
+	
+	public static void SelectValueFromDropDown(List<WebElement> AllItems, String DropDownValue) {
+		int numberOFDropDownItems = AllItems.size();
+		for (int i=0 ; i<=numberOFDropDownItems;i++){
+			String DropDownFieldText = AllItems.get(i).getText();
+			System.out.println("DropDownFieldText:"+DropDownFieldText);
+			if(DropDownFieldText.equals(DropDownValue)){
+				AllItems.get(i).click();
+				break;
+			}
+		}
+		
+	}
 }
