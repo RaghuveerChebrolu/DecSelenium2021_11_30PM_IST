@@ -137,13 +137,61 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 						}
 					}
 					
+					ScrollDown(500);
+					
+					if(RowNumber>1){
+						library_BusinessFunctions.FindElement(Orep.DataDrivencloseIconLanguages).click();
+					}
+					
 					library_BusinessFunctions.FindElement(Orep.DataDrivenLanguages).click();
 					List<WebElement> All_Languages = library_BusinessFunctions.FindElements(Orep.DataDrivenAllLaungauges);
 					
 					System.out.println("All_Languages:"+All_Languages);
 					
 					SelectValueFromDropDown(All_Languages,testDataMap.get("Languages").trim());
-					library_BusinessFunctions.FindElement(Orep.DataDrivenSkillsField).click();
+					
+					WebElement skills=library_BusinessFunctions.FindElement(Orep.DataDrivenSkillsField);
+					ExplicitWait(skills);
+					skills.click();
+					
+					library_BusinessFunctions.FindElement(Orep.DataDriven_Skills).click();
+					List<WebElement> All_Skills = library_BusinessFunctions.FindElements(Orep.DataDriven_AllSkills);
+					SelectValueFromDropDown(All_Skills,testDataMap.get("Skills").trim());
+					
+					WebElement skills1=library_BusinessFunctions.FindElement(Orep.DataDrivenSkillsField);
+					ExplicitWait(skills1);
+					skills1.click();
+					
+					WebElement SelectCountry = library_BusinessFunctions.FindElement(Orep.DataDrivenSelectCountry);
+					ExplicitWait(SelectCountry);
+					SelectCountry.click();
+					library_BusinessFunctions.FindElement(Orep.DataDrivenTextBoxSelectCountry).sendKeys(testDataMap.get("SelectCountry"));
+					library_BusinessFunctions.PressEnterKey();
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenDOB_YY).click();
+					List<WebElement> All_Years = library_BusinessFunctions.FindElements(Orep.DataDrivenAllyearsDOB_YY);
+					SelectValueFromDropDown(All_Years,testDataMap.get("DOB_YY").trim());
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenDOB_MM).click();
+					List<WebElement> All_Months = library_BusinessFunctions.FindElements(Orep.DataDrivenAllMonthsDOB_MM);
+					SelectValueFromDropDown(All_Months,testDataMap.get("DOB_MM").trim());
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenDOB_DD).click();
+					List<WebElement> All_Days = library_BusinessFunctions.FindElements(Orep.DataDrivenAllDaysDOB_DD);
+					SelectValueFromDropDown(All_Days,testDataMap.get("DOB_DD").trim());
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenPassword).clear();
+					library_BusinessFunctions.FindElement(Orep.DataDrivenPassword).sendKeys(testDataMap.get("Password"));
+					
+					library_BusinessFunctions.FindElement(Orep.DataDrivenConfirmPwd).clear();
+					library_BusinessFunctions.FindElement(Orep.DataDrivenConfirmPwd).sendKeys(testDataMap.get("confirm Password"));
+					
+					
+					//submit and connect to database and query to databse and extract results from data base 
+					//and store the results in the hashmap2 . now compare hashmap 1 with hashmap2
+					
+					//if(testDataMap.get("FirstName").trim().equals(DataBaseMap.get("FirstName").trim())){
+					//}
 				
 				} else {
 					System.out.println("Run Mode is not marked as yes for Row number: " + RowNumber);

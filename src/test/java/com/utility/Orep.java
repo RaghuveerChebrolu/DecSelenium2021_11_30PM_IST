@@ -32,12 +32,13 @@ public class Orep {
 	public static final String DataDrivenMovies = constants.ID+"&"+"checkbox2";
 	public static final String DataDrivenHockey = constants.ID+"&"+"checkbox3";
 	public static final String DataDrivenLanguages = constants.ID+"&"+"msdd";
+	public static final String DataDrivencloseIconLanguages = constants.xpath+"&"+"//span[@class='ui-icon ui-icon-close']";
 	public static final String DataDrivenAllLaungauges = constants.xpath+"&"+"//div[@id='msdd']/following-sibling::div/ul/li/a";
 	public static final String DataDrivenSkillsField = constants.xpath+"&"+"//label[contains(text(),'Skills')]";
 	public static final String DataDriven_Skills = constants.xpath+"&"+"//select[@id='Skills']";
 	public static final String DataDriven_AllSkills = constants.xpath+"&"+"//select[@id='Skills']/option";
 	public static final String DataDrivenCountries = constants.ID+"&"+"countries";
-	public static final String DataDrivenSelectCountry = constants.ID+"&"+"//span[@role='combobox']";
+	public static final String DataDrivenSelectCountry = constants.xpath+"&"+"//span[@role='combobox']";
 	public static final String DataDrivenTextBoxSelectCountry = constants.xpath+"&"+"//input[@type='search']";
 	public static final String DataDrivenDOB_YY = constants.xpath+"&"+"//select[@id='yearbox']";
 	public static final String DataDrivenAllyearsDOB_YY = constants.xpath+"&"+"//select[@id='yearbox']/option";
