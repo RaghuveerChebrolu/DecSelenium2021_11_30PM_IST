@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +71,7 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 			File objFile = new File(System.getProperty("user.dir") + "//src//test/resources//AutomationDemoSIte.xlsx");
 			FileInputStream objFileInput = new FileInputStream(objFile);
 			XSSFWorkbook objXSSFWorkBook = new XSSFWorkbook(objFileInput);
-			XSSFSheet ObjXSSFSheet = objXSSFWorkBook.getSheet("TestData");
+			XSSFSheet ObjXSSFSheet = objXSSFWorkBook.getSheet(ObjProperties.getProperty("DaTaDrivenSheetName"));
 			// HSSFWorkbook and HSSFSheet for .xls file format.
 			int Rows = ObjXSSFSheet.getLastRowNum();
 			System.out.println("Rows:" + Rows);
@@ -192,13 +193,16 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 					
 					//if(testDataMap.get("FirstName").trim().equals(DataBaseMap.get("FirstName").trim())){
 					//}
-				
+					
+					FileOutputStream objFileOutput = new FileOutputStream(objFile);
+					WriteToExcelFile(objXSSFWorkBook,ObjXSSFSheet,RowNumber);
+					objXSSFWorkBook.write(objFileOutput);
 				} else {
 					System.out.println("Run Mode is not marked as yes for Row number: " + RowNumber);
 				}
-
 			}
-
+			objXSSFWorkBook.close();
+			objFileInput.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -206,7 +210,6 @@ public class testNg5DataDriven extends library_BusinessFunctions {
 
 	}
 
-	
 
 	public HashMap<String, String> ReadExcelFile(XSSFSheet objXSSFSheet, int rowNumber) {
 		// TODO Auto-generated method stub

@@ -16,6 +16,9 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -270,7 +273,7 @@ public class library_BusinessFunctions {
 		int numberOFDropDownItems = AllItems.size();
 		for (int i = 0; i < numberOFDropDownItems; i++) {
 			String DropDownFieldText = AllItems.get(i).getText();
-			System.out.println("DropDownFieldText:" + DropDownFieldText);
+			//System.out.println("DropDownFieldText:" + DropDownFieldText);
 			if (DropDownFieldText.equals(DropDownValue)) {
 				AllItems.get(i).click();
 				break;
@@ -328,5 +331,14 @@ public class library_BusinessFunctions {
 	public static void ScrollLeft(int pixels) {
 		js = (JavascriptExecutor) driver;// downcasting
 		js.executeScript("window.scrollBy(" + "-" + pixels + ")", 0);
+	}
+	
+	public static void WriteToExcelFile(XSSFWorkbook objXSSFWorkBook, XSSFSheet objXSSFSheet, int rowNumber) {
+		objXSSFSheet=objXSSFWorkBook.getSheet(ObjProperties.getProperty("DaTaDrivenSheetName"));
+		XSSFCellStyle CellStyle = objXSSFWorkBook.createCellStyle();
+		// CellStyle.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+		System.out.println("Row Number in excel is :" + rowNumber);
+		objXSSFSheet.getRow(rowNumber).createCell(18).setCellValue("PASS");
+		objXSSFSheet.getRow(rowNumber).getCell(18).setCellStyle(CellStyle);
 	}
 }
