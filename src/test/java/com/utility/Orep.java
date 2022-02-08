@@ -49,6 +49,8 @@ public class Orep {
 	public static final String DataDrivenPassword= constants.ID+"&"+"firstpassword";
 	public static final String DataDrivenConfirmPwd= constants.ID+"&"+"secondpassword";
 	
+	public static final String Links= constants.tagName+"&"+"a";	
+	
 	
 	
 	

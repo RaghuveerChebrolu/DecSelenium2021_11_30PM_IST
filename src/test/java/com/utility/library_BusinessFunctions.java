@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -340,5 +343,24 @@ public class library_BusinessFunctions {
 		System.out.println("Row Number in excel is :" + rowNumber);
 		objXSSFSheet.getRow(rowNumber).createCell(18).setCellValue("PASS");
 		objXSSFSheet.getRow(rowNumber).getCell(18).setCellStyle(CellStyle);
+	}
+	
+	public static void validatingLinks(String individualLink) throws IOException {
+		try {
+			URL obj = new URL (individualLink);
+			HttpURLConnection objHttpUrlConnection = (HttpURLConnection)obj.openConnection();
+			objHttpUrlConnection.connect();
+			int ResponseCode = objHttpUrlConnection.getResponseCode();
+			//System.out.println("ResponseCode" + ResponseCode+ "for Url:"+individualLink);
+			if(ResponseCode>=400&&ResponseCode<=599){
+				System.out.println("URL:"+individualLink +" : "+"ResponseCode: "+ResponseCode +" is NOT a valid link");
+			}else if(ResponseCode>=200&&ResponseCode<400){
+				System.out.println("URL:"+individualLink +" : "+"ResponseCode: "+ResponseCode +" is a valid link");
+			}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

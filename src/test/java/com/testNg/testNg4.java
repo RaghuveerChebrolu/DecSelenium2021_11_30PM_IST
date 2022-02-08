@@ -373,7 +373,7 @@ public class testNg4 extends library_BusinessFunctions {
 
 	}
 
-	@Test
+	@Test(priority=9)
 	public void FileDownload() throws InterruptedException {
 		System.out.println("inside FileDownload");
 		extent_Test = extent_Reports.createTest(new Object() {
@@ -399,6 +399,56 @@ public class testNg4 extends library_BusinessFunctions {
 		Assert.assertTrue(fileFound, "downloaded file is not found");
 		Obj_File.deleteOnExit();
 	}
+	
+	
+	@Test(priority=10)
+	public void ValidateBrokenLinks(){
+		System.out.println("inside ValidateBrokenLinks");
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
+		driver.navigate().to(ObjProperties.getProperty("Links"));
+		List<WebElement> AllLinks = library_BusinessFunctions.FindElements(Orep.Links);
+		System.out.println("Below are the links avaialable");
+		for(int i=1;i<AllLinks.size();i++){
+			WebElement link = AllLinks.get(i);
+			String individualLink = link.getAttribute("href");
+			System.out.println(individualLink);
+			try {
+				validatingLinks(individualLink);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Test(priority=11)
+	public void ValidateBrokenLinksGmoOnline(){
+		System.out.println("inside ValidateBrokenLinksGmoOnline");
+		extent_Test = extent_Reports.createTest(new Object() {
+		}.getClass().getEnclosingMethod().getName());
+		EnterGMOnline();
+		//driver.navigate().to(ObjProperties.getProperty("Links"));
+		List<WebElement> AllLinks = library_BusinessFunctions.FindElements(Orep.Links);
+		System.out.println("Below are the links avaialable inside Gmo Online");
+		for(int i=0;i<AllLinks.size();i++){
+			System.out.println("TotalLinks:"+AllLinks.size());
+			WebElement link = AllLinks.get(i);
+			String individualLink = link.getAttribute("href");
+			System.out.println(i +" "+individualLink );
+			try {
+				if(i!=6){
+				validatingLinks(individualLink);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+
 
 	@BeforeMethod
 	public void beforeMethod() {
