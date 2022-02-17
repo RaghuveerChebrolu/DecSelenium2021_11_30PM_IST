@@ -47,6 +47,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
@@ -448,6 +449,20 @@ public class testNg4 extends library_BusinessFunctions {
 	}
 	
 	
+	@Test(priority=12,dataProvider = "raghu")
+	public void validateDataProvider(String user, String pwd) {
+
+		System.out.println("user: " + user);
+		System.out.println("pwd: " + pwd);
+
+	}
+
+	@DataProvider
+	public Object[][] raghu() {
+		return new Object[][] { new Object[] { "user1", "pwd1" }, 
+			new Object[] { "user2", "pwd2" },new Object[] { "user3", "pwd3" },
+			new Object[] { "user4", "pwd4" }, };
+	}
 
 
 	@BeforeMethod
@@ -486,6 +501,8 @@ public class testNg4 extends library_BusinessFunctions {
 		System.out.println("inside afterMethod");
 
 	}
+	
+	
 
 	@BeforeClass
 	public void beforeClass() {
