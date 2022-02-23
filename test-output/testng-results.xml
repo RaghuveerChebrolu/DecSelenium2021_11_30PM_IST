@@ -1,49 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="4" total="5" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="135" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
+  <suite name="Default suite" duration-ms="115" started-at="2022-02-19T07:57:39Z" finished-at="2022-02-19T07:57:39Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="135" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
-      <class name="com.testNg.testNgAnnotations">
-        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="beforeSuite" is-config="true" duration-ms="44" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeSuite -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="beforeTest" is-config="true" duration-ms="4" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="beforeClass" is-config="true" duration-ms="1" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
+    <test name="Default test" duration-ms="115" started-at="2022-02-19T07:57:39Z" finished-at="2022-02-19T07:57:39Z">
+      <class name="com.testNg.TestNgParallelClass1">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.testNg.TestNgParallelClass1@22eeefeb]" name="beforeClass" is-config="true" duration-ms="22" started-at="2022-02-19T07:57:39Z" finished-at="2022-02-19T07:57:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
+        <test-method status="PASS" signature="testMethodOne()[pri:0, instance:com.testNg.TestNgParallelClass1@22eeefeb]" name="testMethodOne" duration-ms="15" started-at="2022-02-19T07:57:39Z" finished-at="2022-02-19T07:57:39Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="Testcase3()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="Testcase3" duration-ms="33" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
+        </test-method> <!-- testMethodOne -->
+        <test-method status="PASS" signature="testMethodTwo()[pri:0, instance:com.testNg.TestNgParallelClass1@22eeefeb]" name="testMethodTwo" duration-ms="2" started-at="2022-02-19T07:57:39Z" finished-at="2022-02-19T07:57:39Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase3 -->
-        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="afterMethod" is-config="true" duration-ms="6" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterMethod -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="afterClass" is-config="true" duration-ms="3" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
+        </test-method> <!-- testMethodTwo -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.testNg.TestNgParallelClass1@22eeefeb]" name="afterClass" is-config="true" duration-ms="0" started-at="2022-02-19T07:57:39Z" finished-at="2022-02-19T07:57:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="afterTest" is-config="true" duration-ms="2" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterTest -->
-        <test-method status="PASS" signature="afterSuite()[pri:0, instance:com.testNg.testNgAnnotations@47c62251]" name="afterSuite" is-config="true" duration-ms="1" started-at="2021-12-03T19:04:20Z" finished-at="2021-12-03T19:04:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterSuite -->
-      </class> <!-- com.testNg.testNgAnnotations -->
+      </class> <!-- com.testNg.TestNgParallelClass1 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
