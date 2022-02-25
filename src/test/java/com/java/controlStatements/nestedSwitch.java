@@ -5,7 +5,7 @@ public class nestedSwitch {
 	public static void main(String args[]) {
 		// C - CSE, E - ECE, M - Mechanical
 		char branch = 'E';
-		int collegeYear = 3;
+		int collegeYear = 9;
 		switch (collegeYear) {
 		case 1:
 			System.out.println("English, Maths, Science");
@@ -49,6 +49,8 @@ public class nestedSwitch {
 				break;
 			}
 			break;
+		default :
+			System.out.println("matching year not found");
 		}
 	}
 }

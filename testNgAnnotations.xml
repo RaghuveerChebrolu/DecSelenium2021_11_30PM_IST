@@ -4,6 +4,9 @@
 		<classes>
 			<class name="com.testNg.testNgAnnotations">
 				<methods>
+					<!-- <execlude>
+						<include name="Testcase3"></include>
+					</execlude> -->
 					<include name="Testcase3"></include>
 					<!-- <include name="Testcase3"></include> -->
 				</methods>

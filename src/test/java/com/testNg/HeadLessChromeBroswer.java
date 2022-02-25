@@ -15,16 +15,16 @@ import com.utility.library_BusinessFunctions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class HeadLessChromeBroswer extends library_BusinessFunctions {
+public class HeadLessChromeBroswer {
 	WebDriver driver;
 	@Test(priority = 0)
 	public void ExecutingInChromedriverHeadLess() throws IOException {
-		ReadingPropertyFile();
+		library_BusinessFunctions.ReadingPropertyFile();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("headless");
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver(options);
-		driver.get(ObjProperties.getProperty("GmoOnline"));
+		driver.get(library_BusinessFunctions.ObjProperties.getProperty("GmoOnline"));
 		String GmoOnlineTitle = driver.getTitle();
 		System.out.println("GmoOnlineTitle:"+GmoOnlineTitle); 
 		Assert.assertEquals(GmoOnlineTitle, "Welcome to Green Mountain Outpost");
@@ -51,7 +51,7 @@ public class HeadLessChromeBroswer extends library_BusinessFunctions {
 		//waitForPageToLoad();
 		String PlaceOrder = driver.getTitle();
 		System.out.println(PlaceOrder);
-		Assert.assertEquals(PlaceOrder, ObjProperties.getProperty("PlaceOrderTitle"));
+		Assert.assertEquals(PlaceOrder, library_BusinessFunctions.ObjProperties.getProperty("PlaceOrderTitle"));
 		String UnitPrice = driver
 				.findElement(By.xpath("//table[@cellpadding='4' and @cellspacing='1']/tbody/tr[2]/td[4]")).getText();
 		System.out.println("UnitPrice_HikingBoots: " + UnitPrice);
